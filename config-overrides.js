@@ -26,6 +26,17 @@ module.exports = function override(config) {
 module.exports.devServer = function (configFunction) {
   return function (proxy, allowedHost) {
     const config = configFunction(proxy, allowedHost);
+    
+    // Disable runtime error overlay to prevent browser extension (e.g. MetaMask) errors from interrupting development
+    config.client = {
+      ...(config.client || {}),
+      overlay: {
+        errors: true,
+        warnings: false,
+        runtimeErrors: false,
+      },
+    };
+
     if (Array.isArray(config.allowedHosts)) {
       config.allowedHosts = config.allowedHosts.filter(Boolean);
     }

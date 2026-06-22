@@ -35,3 +35,10 @@ Billion Towers has the potential to redefine the real estate market by offering 
 ```
    npm start
 ```
+
+## Troubleshooting
+
+### Uncaught Runtime Errors: "Failed to connect to MetaMask"
+During development, if you have the MetaMask Chrome extension installed, you may encounter an overlay reading: `Uncaught runtime errors: ERROR Failed to connect to MetaMask at inpage.js`. 
+* **Cause**: This is a known issue where MetaMask throws an internal error that gets intercepted by the `webpack-dev-server` and displayed on top of the app using `react-error-overlay`.
+* **Resolution**: The `config-overrides.js` file has been modified to set `config.client.overlay.runtimeErrors = false`. This suppresses third-party browser extension errors from blocking your local development workflow, while keeping standard compile warnings and errors active.
