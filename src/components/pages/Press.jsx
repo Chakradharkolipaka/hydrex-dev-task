@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Newspaper, Megaphone, Download, Mail } from "lucide-react";
+import { Megaphone, Download } from "lucide-react";
 import { containerVariants, itemVariants } from "./home/homeMotion";
 
 const Press = () => {

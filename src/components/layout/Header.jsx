@@ -44,9 +44,9 @@ const Header = () => {
 
   const navigation = [
     { name: 'Home', href: '/' },
-    { name: 'Platform', href: '/platform' },
+    { name: 'Marketplace', href: '/marketplace' },
     { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' },
+    { name: 'FAQ', href: '/faq' },
   ];
 
   const closeMenu = () => setIsMenuOpen(false);
@@ -55,6 +55,14 @@ const Header = () => {
     closed: { opacity: 0, y: -12 },
     open: { opacity: 1, y: 0 },
   };
+
+  /* Shared nav-link classes for uniform typography */
+  const navLinkBase =
+    'inline-flex items-center rounded-lg px-3.5 py-2 font-sans text-[0.9375rem] font-medium whitespace-nowrap transition-colors duration-200';
+  const navLinkActive =
+    'bg-brand-cyan/10 text-brand-cyan ring-1 ring-inset ring-brand-cyan/35';
+  const navLinkIdle =
+    'text-brand-ink-secondary hover:text-brand-cyan hover:bg-white/[0.06]';
 
   return (
     <>
@@ -69,42 +77,58 @@ const Header = () => {
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between lg:h-20">
+          <div className="flex h-16 items-center justify-between md:h-[72px]">
+            {/* ── Logo ────────────────────────────────────── */}
             <motion.div className="min-w-0 flex-shrink-0 pr-2" whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}>
               <Link to="/" className="flex min-w-0 items-center" onClick={closeMenu} aria-label="Billion Towers home">
                 <Logo placement="header" />
               </Link>
             </motion.div>
 
-            <nav className="hidden items-center gap-1 lg:flex">
+            {/* ── Desktop nav — horizontal row, gap-8, uniform type ─── */}
+            <nav className="hidden items-center gap-8 md:flex" id="desktop-nav">
               {navigation.map((item) => {
                 const isActive = location.pathname === item.href;
                 return (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`inline-flex rounded-md px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-                      isActive
-                        ? 'bg-brand-cyan/10 text-brand-cyan ring-1 ring-inset ring-brand-cyan/35'
-                        : 'text-brand-ink-secondary hover:bg-white/5 hover:text-brand-cyan'
-                    }`}
+                    className={`${navLinkBase} ${isActive ? navLinkActive : navLinkIdle}`}
                   >
                     {item.name}
                   </Link>
                 );
               })}
+
+              {/* ── Connect CTA button (gold gradient) ──── */}
+              <motion.button
+                type="button"
+                className="ml-4 inline-flex items-center justify-center rounded-xl px-6 py-2.5 font-sans text-[0.875rem] font-semibold text-[#0a0f18] whitespace-nowrap"
+                style={{
+                  background: 'linear-gradient(120deg, #f6e08b 0%, #e8c547 35%, #d4af37 70%, #c9a030 100%)',
+                  boxShadow: '0 4px 22px rgba(212, 175, 55, 0.28)',
+                }}
+                whileHover={{
+                  scale: 1.03,
+                  boxShadow: '0 6px 30px rgba(212, 175, 55, 0.38)',
+                }}
+                whileTap={{ scale: 0.97 }}
+                id="connect-btn-desktop"
+              >
+                Connect
+              </motion.button>
             </nav>
 
-            <div className="hidden items-center space-x-4 lg:flex" />
-
+            {/* ── Hamburger (mobile) ──────────────────────── */}
             <motion.button
               type="button"
-              className="min-h-[44px] min-w-[44px] p-2 text-brand-ink-secondary transition-colors hover:text-brand-cyan lg:hidden"
+              className="min-h-[44px] min-w-[44px] p-2 text-brand-ink-secondary transition-colors hover:text-brand-cyan md:hidden"
               onClick={() => setIsMenuOpen((o) => !o)}
               aria-expanded={isMenuOpen}
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
+              id="mobile-menu-toggle"
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </motion.button>
@@ -116,12 +140,13 @@ const Header = () => {
         </div>
       </motion.header>
 
+      {/* ── Mobile menu panel ─────────────────────────────── */}
       <AnimatePresence>
         {isMenuOpen && (
           <>
             <motion.div
               role="presentation"
-              className="fixed inset-0 top-16 z-[90] bg-black/75 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 top-16 z-[90] bg-black/75 backdrop-blur-sm md:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -129,12 +154,13 @@ const Header = () => {
               onClick={closeMenu}
             />
             <motion.nav
-              className="fixed left-0 right-0 top-16 z-[95] max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain border-b border-white/10 bg-brand-bg-raised/98 px-4 py-4 shadow-2xl backdrop-blur-xl lg:hidden"
+              className="fixed left-0 right-0 top-16 z-[95] max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain border-b border-white/10 bg-brand-bg-raised/98 px-4 py-4 shadow-2xl backdrop-blur-xl md:hidden"
               variants={panelVariants}
               initial="closed"
               animate="open"
               exit="closed"
               transition={{ duration: 0.25, ease: 'easeOut' }}
+              id="mobile-nav-panel"
             >
               <div className="mx-auto flex max-w-lg flex-col gap-1 pb-6">
                 {navigation.map((item) => {
@@ -143,19 +169,37 @@ const Header = () => {
                     <Link
                       key={item.name}
                       to={item.href}
-                      className={`flex min-h-[48px] items-center gap-3 rounded-xl px-4 py-3 font-medium transition-colors ${
+                      className={`flex min-h-[48px] items-center rounded-xl px-4 py-3 font-sans text-[0.9375rem] font-medium transition-colors ${
                         isActive
                           ? 'bg-brand-cyan/12 text-brand-cyan ring-1 ring-inset ring-brand-cyan/35'
                           : 'text-brand-ink-secondary hover:bg-brand-cyan/10 hover:text-brand-cyan'
                       }`}
                       onClick={closeMenu}
                     >
-                      <span>{item.name}</span>
+                      {item.name}
                     </Link>
                   );
                 })}
 
                 <div className="my-3 border-t border-white/10" />
+
+                {/* ── Connect CTA (mobile — full width) ────── */}
+                <motion.button
+                  type="button"
+                  className="flex min-h-[48px] w-full items-center justify-center rounded-xl px-6 py-3 font-sans text-[0.9375rem] font-semibold text-[#0a0f18]"
+                  style={{
+                    background: 'linear-gradient(120deg, #f6e08b 0%, #e8c547 35%, #d4af37 70%, #c9a030 100%)',
+                    boxShadow: '0 4px 22px rgba(212, 175, 55, 0.28)',
+                  }}
+                  whileHover={{
+                    scale: 1.02,
+                    boxShadow: '0 6px 30px rgba(212, 175, 55, 0.38)',
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  id="connect-btn-mobile"
+                >
+                  Connect
+                </motion.button>
               </div>
             </motion.nav>
           </>

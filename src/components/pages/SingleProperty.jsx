@@ -293,7 +293,7 @@ const SingleProperty = () => {
                   <div className="flex justify-between gap-3 border-b border-white/[0.06] pb-3">
                     <span className="text-brand-ink-secondary">Price per share</span>
                     <span className="font-semibold tabular-nums text-white">
-                      ${((property.price * 1000) / property.totalShares).toFixed(2)}
+                      ${((property.price * 2000) / property.totalShares).toFixed(2)}
                     </span>
                   </div>
                   <div className="flex justify-between gap-3 border-b border-white/[0.06] pb-3">

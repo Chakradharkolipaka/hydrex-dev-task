@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import { BookOpen, Sparkles, PenTool, Clock } from "lucide-react";
+import { BookOpen, Sparkles, Clock } from "lucide-react";
 import { containerVariants, itemVariants } from "./home/homeMotion";
 
 const Blog = () => {

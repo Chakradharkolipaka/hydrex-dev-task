@@ -9,8 +9,7 @@ import {
   Clock,
   Globe,
   Zap,
-  Shield,
-  Target
+  Shield
 } from 'lucide-react';
 
 const ContactUs = () => {

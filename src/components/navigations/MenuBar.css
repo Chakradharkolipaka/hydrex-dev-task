@@ -1,160 +1,268 @@
-:root {
-  --blue: #006EFF;
-  --darkBlue: #12417E;
-}
+/* ── MenuBar — Modern Flexbox Layout ──────────────────────────────────────── */
 
-.nav-wrapper {
-    margin: auto;
-    /* max-width: 1126px; */
-    padding: 10px;
-}
-
-/* header */  
+/* ── Header container ──────────────────────────────────────────────────── */
 .header {
-    background-color: white;
-    /*box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);*/
-    position: fixed;
-    width: 100%;
-    padding: 0 5%;
-    z-index: 3;
-}
-  
-.header ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    overflow: hidden;
-    background-color: transparent;
-    text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
+  background-color: rgba(5, 8, 22, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.header li a {
-    display: block;
-    padding: 20px 20px;
-    text-decoration: none;
-    color: var(--blue);
-    font-weight: bold;
+/* ── Inner wrapper — flex row, centered ────────────────────────────────── */
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 64px;
 }
 
-.header li button {
-  padding: 16px 32px;
-  border-radius: 10px;
-}
-  
-.header li a:hover,
-.header .menu-btn:hover {
-    background-color: #f4f4f4;
-}
-  
+/* ── Logo ──────────────────────────────────────────────────────────────── */
 .header .logo {
-    display: block;
-    float: left;
-    font: normal 2em Jost;
-    padding: 10px 20px;
-    text-decoration: none;
-    font-weight: 900;
-    color: var(--blue);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-family: 'Poppins', 'Inter', system-ui, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #00E5FF;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+  flex-shrink: 0;
 }
 
-/* menu */
+.header .logo:hover {
+  opacity: 0.85;
+}
+
+.header .logo svg {
+  flex-shrink: 0;
+}
+
+/* ── Desktop nav links ─────────────────────────────────────────────────── */
 .header .menu {
-    clear: both;
-    max-height: 0;
-    transition: max-height .2s ease-out;
-}
-  
-/* menu icon */  
-.header .menu-icon {
-    cursor: pointer;
-    display: inline-block;
-    float: right;
-    padding: 28px 20px;
-    position: relative;
-    user-select: none;
-}
-  
-.header .menu-icon .navicon {
-    background: transparent;
-    display: block;
-    height: 2px;
-    position: relative;
-    transition: background .2s ease-out;
-    width: 18px;
-}
-  
-.header .menu-icon .navicon:before,
-.header .menu-icon .navicon:after {
-    background: black;
-    content: '';
-    display: block;
-    height: 100%;
-    position: absolute;
-    transition: all .2s ease-out;
-    width: 100%;
-}
-  
-.header .menu-icon .navicon:before {
-    top: 5px;
-}
-  
-.header .menu-icon .navicon:after {
-    top: -5px;
-}
-  
-/* menu btn */  
-.header .menu-btn {
-    display: none;
-}
-  
-.header .menu-btn:checked ~ .menu {
-    max-height: 240px;
-}
-  
-.header .menu-btn:checked ~ .menu-icon .navicon {
-    background: transparent;
+  display: none; /* hidden on mobile by default */
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.header .menu-btn:checked ~ .menu-icon .navicon:before {
-    transform: rotate(-45deg);
-}
-  
-.header .menu-btn:checked ~ .menu-icon .navicon:after {
-    transform: rotate(45deg);
-}
-  
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
-    top: 0;
+.header .menu li a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.875rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #A7B4C8;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  white-space: nowrap;
 }
 
+.header .menu li a:hover {
+  color: #00E5FF;
+  background-color: rgba(0, 229, 255, 0.08);
+}
 
-/* 48em = 768px */
+.header .menu li a.active {
+  color: #00E5FF;
+  background-color: rgba(0, 229, 255, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(0, 229, 255, 0.35);
+}
+
+/* ── Connect button ────────────────────────────────────────────────────── */
+.header .menu li .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 0.625rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0a0f18;
+  background: linear-gradient(120deg, #f6e08b 0%, #e8c547 35%, #d4af37 70%, #c9a030 100%);
+  box-shadow: 0 4px 22px rgba(212, 175, 55, 0.28);
+  cursor: pointer;
+  transition: filter 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.header .menu li .button:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 6px 30px rgba(212, 175, 55, 0.38);
+  transform: translateY(-1px);
+  background-color: transparent; /* override global button:hover */
+}
+
+.header .menu li .button:active {
+  transform: translateY(0);
+}
+
+/* ── Hamburger icon (mobile) ───────────────────────────────────────────── */
+.menu-btn {
+  display: none; /* checkbox is always hidden */
+}
+
+.menu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.menu-icon .navicon {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #A7B4C8;
+  border-radius: 2px;
+  position: relative;
+  transition: background 0.25s ease;
+}
+
+.menu-icon .navicon::before,
+.menu-icon .navicon::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #A7B4C8;
+  border-radius: 2px;
+  position: absolute;
+  transition: transform 0.25s ease, top 0.25s ease;
+}
+
+.menu-icon .navicon::before {
+  top: -6px;
+}
+
+.menu-icon .navicon::after {
+  top: 6px;
+}
+
+/* ── Hamburger open state ──────────────────────────────────────────────── */
+.menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.menu-btn:checked ~ .menu-icon .navicon::before {
+  top: 0;
+  transform: rotate(45deg);
+  background: #00E5FF;
+}
+
+.menu-btn:checked ~ .menu-icon .navicon::after {
+  top: 0;
+  transform: rotate(-45deg);
+  background: #00E5FF;
+}
+
+/* ── Mobile menu (shown via checkbox) ──────────────────────────────────── */
+.menu-btn:checked ~ .menu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 64px;
+  left: 0;
+  right: 0;
+  background: rgba(7, 18, 38, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 1rem 1.25rem;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+  animation: menuSlideDown 0.25s ease-out;
+}
+
+@keyframes menuSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu-btn:checked ~ .menu li {
+  width: 100%;
+}
+
+.menu-btn:checked ~ .menu li a {
+  display: flex;
+  padding: 0.875rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  min-height: 48px;
+}
+
+.menu-btn:checked ~ .menu li .button {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  min-height: 48px;
+  font-size: 0.9375rem;
+}
+
+/* ── Desktop breakpoint (768px+) ───────────────────────────────────────── */
 @media (min-width: 48em) {
-    .header li {
-      float: left;
-    }
-    
-    .header li a {
-      padding: 20px 15px;
-    }
+  .nav-wrapper {
+    height: 72px;
+    padding: 0 2rem;
+  }
 
-    .header li button {
-        margin-left: 72px;
-        margin-top: 15px;
-    }
+  .header .logo {
+    font-size: 1.375rem;
+  }
 
-    .header .menu {
-      clear: none;
-      float: right;
-      max-height: none;
-    }
-    
-    .header {
-      background-color: transparent;
-      position: absolute;
-    }
+  /* Show nav links as horizontal row */
+  .header .menu {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
 
-    .header .menu-icon {
-      display: none;
-    }
+  /* Hide hamburger */
+  .menu-icon {
+    display: none;
+  }
+
+  /* Connect button spacing */
+  .header .menu li .button {
+    margin-left: 1.5rem;
+  }
+}
+
+/* ── Large desktop (1024px+) ───────────────────────────────────────────── */
+@media (min-width: 64em) {
+  .header .menu {
+    gap: 2rem;
+  }
+
+  .header .menu li a {
+    padding: 0.5rem 1rem;
+  }
+
+  .header .menu li .button {
+    margin-left: 2rem;
+    padding: 0.5rem 2rem;
+  }
 }

@@ -1,10 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-import './MenuBar.css'
-
+import './MenuBar.css';
 
 const MenuBar = () => {
+    const location = useLocation();
+
+    const navItems = [
+        { to: '/about', label: 'About' },
+        { to: '/marketplace', label: 'Marketplace' },
+        { to: '/faq', label: 'FAQ' },
+    ];
+
     return (
         <nav className="header">
             <div className="nav-wrapper">
@@ -19,14 +26,21 @@ const MenuBar = () => {
                 <label className="menu-icon" htmlFor="menu-btn"><span className="navicon"></span></label>
 
                 <ul className="menu">
-                    <li><Link to="/about">About</Link></li>
-                    <li><Link to="/marketplace">Marketplace</Link></li>
-                    <li><Link to="/faq">FAQ</Link></li>
+                    {navItems.map((item) => (
+                        <li key={item.to}>
+                            <Link
+                                to={item.to}
+                                className={location.pathname === item.to ? 'active' : ''}
+                            >
+                                {item.label}
+                            </Link>
+                        </li>
+                    ))}
                     <li><button className='button'>Connect</button></li>                
                 </ul>
             </div>
         </nav>
-    )
-}
+    );
+};
 
 export default MenuBar;

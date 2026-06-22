@@ -9,6 +9,7 @@ const paymentRouter = require("./routes/paymentRoute");
 const productRouter = require("./routes/productRoute");
 const userRouter = require("./routes/userRoute");
 const pageRouter = require("./routes/pageRoute");
+const ethPriceRouter = require("./routes/ethPriceRoute");
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use("/api/payment", paymentRouter);
 app.use("/api/product", productRouter);
 app.use("/api/user", userRouter);
 app.use("/api/pages", pageRouter);
+app.use("/api/eth-price", ethPriceRouter);
 
 app.get("/api/placeholder/:width/:height", (req, res) => {
   const { width, height } = req.params;

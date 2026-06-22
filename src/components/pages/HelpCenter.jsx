@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   HelpCircle,
-  BookOpen,
   MessageSquare,
   Phone,
   ChevronDown,
 } from "lucide-react";
-import { containerVariants, itemVariants } from "./home/homeMotion";
+import { containerVariants } from "./home/homeMotion";
 
 const HelpCenter = () => {
   useEffect(() => {

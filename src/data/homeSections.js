@@ -45,7 +45,7 @@ export const statsIntro =
  */
 export const stats = [
   { icon: UserRound, value: '100+', label: 'Institutional desks' },
-  { leading: 'dollar-up', value: '$2B+', label: 'Liquidity capacity' },
+  { leading: 'dollar-up', value: '$2B+', label: 'Liquidity capacity', priceUsd: 2000000000 },
   { icon: Building2, value: '3', label: 'Product suites' },
   { leading: 'user-shield', value: '99.99%', label: 'Platform uptime' },
 ];
