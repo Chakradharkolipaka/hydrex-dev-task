@@ -21,20 +21,44 @@ Billion Towers is a proposed responsive real estate platform built with ReactJS,
 
 Billion Towers has the potential to redefine the real estate market by offering a seamless, secure, and technologically advanced platform.  By focusing on user experience, security, and innovation, Billion Towers aims to become the leading digital real estate marketplace in the future.  Further detailed planning, including a more specific technical architecture, budgeting, and team structure, is necessary for project commencement.
 
-## How to build on your side?
+## Prerequisites
 
+Before running the project, ensure you have the following installed:
+* **Node.js** (v18.x or v20.x)
+* **MongoDB** (Local instance or MongoDB Atlas cluster)
 
-### Install dependencies ( v18.x / v20.x )
+## Installation and Setup
 
-```
+1. **Install Dependencies**
+   Install all required Node modules for both the frontend and backend:
+   ```bash
    npm install
-```
+   ```
 
-### Run on localhost
+2. **Environment Variables**
+   Ensure you have a `.env` file in the root of the project. You must at least configure the database connection to run the backend successfully:
+   ```env
+   MONGO_URI=your_mongodb_connection_string
+   ```
+   *(Review the `.env` file for other required API keys like Stripe, Cloudinary, Sendgrid, etc., based on the features you want to test).*
 
+## How to Run the Application
+
+This project is configured to run both the React frontend and the Express backend simultaneously using `concurrently`.
+
+### Start Development Servers
+
+Run the following command in the root directory:
+
+```bash
+npm start
 ```
-   npm start
-```
+*(Alternatively, you can run `npm run dev`)*
+
+This single command will:
+1. Start the Express backend server (typically on `http://localhost:3099`)
+2. Start the React frontend application (typically on `http://localhost:3000`)
+
 
 ## Troubleshooting
 
